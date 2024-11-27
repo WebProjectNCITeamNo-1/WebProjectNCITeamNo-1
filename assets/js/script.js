@@ -1,6 +1,7 @@
 const shoppingCartDisplay = document.getElementById("shopping-cart");
-let cartItems = [];
-let cartProductIds = [];
+//localstorage ensures it is accessible on different pages
+let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+let cartProductIds = JSON.parse(localStorage.getItem('cartProductIds')) || [];
 
 
 //Product array
@@ -73,12 +74,14 @@ document.addEventListener("DOMContentLoaded", function() {
             }
             else{
                 cartItems.push({productId, productQty});
+                localStorage.setItem('cartItems', JSON.stringify(cartItems));
             };
             if (cartProductIds.includes(productId)){
                 alert("Sorry, You have previously added this item to cart!");
             }
             else{
                 cartProductIds.push(productId);
+                localStorage.setItem('cartProductIds', JSON.stringify(cartProductIds));
             };
 
             
