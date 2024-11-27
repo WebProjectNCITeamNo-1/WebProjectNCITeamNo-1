@@ -93,4 +93,14 @@ document.addEventListener("DOMContentLoaded", function() {
     
 });
 
+function emptyCart(){
+    cartItems = [];
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    cartProductIds = [];
+    localStorage.setItem('cartProductIds', JSON.stringify(cartProductIds));
+    alert("Your Shopping cart is now empty!");
+};
 
+
+console.log(cartItems);
+console.log(cartProductIds);
