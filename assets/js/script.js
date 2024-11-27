@@ -1,4 +1,7 @@
 const shoppingCartDisplay = document.getElementById("shopping-cart");
+let cartItems = [];
+let cartProductIds = [];
+
 
 //Product array
 const allProducts = [
@@ -43,10 +46,11 @@ document.addEventListener("DOMContentLoaded", function() {
             <div class="card-body">
                 <h5 class="card-title">${product.name}</h5>
                 <p class="card-text">${product.description}</p>
-                <p class="card-price">Price: $${product.price.toFixed(2)}</p>
+                <p class="card-price">Price: €${product.price.toFixed(2)}</p>
                 <a href="#" class="btn btn-primary">View</a>
                 <button type="button" class="btn btn-dark add-to-cart-btn" 
-                    data-product-price="${product.price}" 
+                    data-product-price="${product.price}"
+                    data-product-qty="1" 
                     data-product-id="${product.id}">
                     Add to Cart
                 </button>
@@ -62,11 +66,28 @@ document.addEventListener("DOMContentLoaded", function() {
         button.addEventListener('click', function() {
             const productId = this.dataset.productId;
             const productPrice = this.dataset.productPrice;
-            console.log(`Added Product ID: ${productId}, Price: $${productPrice}`);
-            // Add your "add to cart" logic here
+            const productQty = this.dataset.productQty;
+            console.log(`Added Product ID: ${productId}, Price: €${productPrice}`);
+            if (cartItems.some(item => item.productId === productId)){
+                alert("Sorry, You have previously added this item to cart!");
+            }
+            else{
+                cartItems.push({productId, productQty});
+            };
+            if (cartProductIds.includes(productId)){
+                alert("Sorry, You have previously added this item to cart!");
+            }
+            else{
+                cartProductIds.push(productId);
+            };
+
+            
+            
+            console.log(cartItems);
+            console.log(cartProductIds);
         });
     });
-
+    
 });
 
 
