@@ -57,6 +57,15 @@ document.addEventListener("DOMContentLoaded", function() {
         productList.appendChild(card);
     });
 
+    //Add event listeners to all the "Add to Cart" button elements
+    document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const productId = this.dataset.productId;
+            const productPrice = this.dataset.productPrice;
+            console.log(`Added Product ID: ${productId}, Price: $${productPrice}`);
+            // Add your "add to cart" logic here
+        });
+    });
 
 });
 
