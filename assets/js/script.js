@@ -11,21 +11,28 @@ const allProducts = [
         name: "Monalissa", 
         price: 25, 
         description: "Some quick example text to build on the card title and make up the bulk of the card's content.", 
-        image: "https://placehold.co/600x400" 
+        image: "https://api-www.louvre.fr/sites/default/files/2020-12/leonard-de-vinci-la-joconde-portrait-de-monna-lisa-detail.jpg" 
     },
     { 
         id: 2, 
         name: "Eifle Tower", 
         price: 40, 
         description: "Some quick example text to build on the card title and make up the bulk of the card's content.", 
-        image: "https://placehold.co/600x400" 
+        image: "https://media.architecturaldigest.com/photos/5ef5f6b4e5c8c1d259c3b00b/16:9/w_1600,c_limit/GettyImages-803432314.jpg" 
     },
     { 
         id: 3, 
         name: "Eire Tower", 
         price: 30, 
         description: "Some quick example text to build on the card title and make up the bulk of the card's content.", 
-        image: "https://placehold.co/600x400" 
+        image: "https://www.wmf-inc.com/assets/galleries/Projects/Bicentennial-Tower/_AUTOx300_fit_center-center_100/Tower.jpg" 
+    },
+    { 
+        id: 3, 
+        name: "Eire Tower", 
+        price: 30, 
+        description: "Some quick example text to build on the card title and make up the bulk of the card's content.", 
+        image: "https://www.singulart.com/blog/wp-content/uploads/2023/08/image-34-1140x855.png" 
     }
 ];
 
@@ -43,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // Populate the div/card's inner content
         card.innerHTML = `
-            <img src="${product.image}" class="card-img-top" alt="${product.name}">
+            <img src="${product.image}" class="card-img-top" style="height: 160px;" alt="${product.name}">
             <div class="card-body">
                 <h5 class="card-title">${product.name}</h5>
                 <p class="card-text">${product.description}</p>
