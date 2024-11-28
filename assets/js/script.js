@@ -42,8 +42,9 @@ const shoppingCart = document.getElementById('shopping-cart3');
 
 //Allow DOM to load before actions
 document.addEventListener("DOMContentLoaded", function() {
+    const bodyId = document.body.id;
     const currentPath = window.location.pathname;
-    if(currentPath==='/index.html'){
+    if(bodyId==='index-page'){
         // Looping through the allproducts array and creating each cards
         allProducts.forEach(product => {
             // Create the card outer div
@@ -88,9 +89,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 else{
                     cartItems.push({productId, productName, productPrice, productQty});
                     localStorage.setItem('cartItems', JSON.stringify(cartItems));
+                    alert("Item added to cart successfuly!");
                 };
                 if (cartProductIds.includes(productId)){
-                    alert("Sorry, You have previously added this item to cart!");
                 }
                 else{
                     cartProductIds.push(productId);
@@ -105,7 +106,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
 
     }
-    else if(currentPath==='/cart.html'){
+    else if(bodyId==='cart-page'){
         // Looping through the allproducts array and creating each cards
         cartItems.forEach(item => {
             // Create the card outer div
