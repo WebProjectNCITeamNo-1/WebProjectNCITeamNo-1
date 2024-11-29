@@ -1,4 +1,10 @@
 const shoppingCartDisplay = document.getElementById("shopping-cart");
+const emptyCartButton = document.getElementById("totals-box");
+const orderForm = document.getElementById("order-form");
+const shipping = document.getElementById("shipping");
+const total = document.getElementById("total");
+const grandTotal = document.getElementById("grand-total");
+
 //localstorage ensures it is accessible on different pages
 let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
 let cartProductIds = JSON.parse(localStorage.getItem('cartProductIds')) || [];
@@ -122,12 +128,12 @@ document.addEventListener("DOMContentLoaded", function() {
                         <div class="row bg-warning">
                             <div class="col">${item.productId}</div>
                             <div class="col">${item.productName}</div>
-                            <div class="col">${item.productPrice}</div>
+                            <div class="col">${item.productPrice}.00</div>
                             <div class="col">
                                 <input id="qty-${item.productId}" value="${item.productQty}" type="number" min="1" max="99" style="width: 40px;">
                                 <a onclick="priceUpdate(${item.productId})"><span>Update</span></a>
                             </div>
-                            <div id="subtotal-${item.productId}" class="col subt-total">${item.productPrice*item.productQty}</div>
+                            <div id="subtotal-${item.productId}" class="col subt-total">${item.productPrice*item.productQty}.00</div>
                         </div>
                         
                     </div>
@@ -135,10 +141,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 shoppingCart.appendChild(basket);
             });
         }else{
-            let emptyCartButton = document.getElementById("empty-cart");
             emptyCartButton.style.display = "none";
             shoppingCart.innerHTML = "Your Cart is Currently Empty!";
         }
+        totals();
 
     }
 
@@ -166,19 +172,32 @@ function priceUpdate(productId){
         // update localStorage
         localStorage.setItem('cartItems', JSON.stringify(cartItems));
 
-       // Update the subtotal
-       const subtotalField = document.querySelector(`#subtotal-${productId}`);
-       const updatedSubtotal = cartItems[index].productPrice * newQty;
-       subtotalField.textContent = updatedSubtotal.toFixed(2);
+        // Update the subtotal
+        const subtotalField = document.querySelector(`#subtotal-${productId}`);
+        const updatedSubtotal = cartItems[index].productPrice * newQty;
+        subtotalField.textContent = updatedSubtotal.toFixed(2);
 
-        alert(`Updated Product ID: ${productId}, New Quantity: ${newQty}`);
+        totals();
         refresh();
+        alert(`Updated Product ID: ${productId}, New Quantity: ${newQty}`);
+
     } else {
         alert(`Product with ID ${productId} not found in the cart.`);
     }
 
 }
 
+//calculate total, shipping, and grandtotal
+function totals(){
+    let totalBuffer = 0;
+    shipping.textContent = 10;
+    for(i=0; i<cartItems.length; i++){
+        totalBuffer += cartItems[i].productPrice*cartItems[i].productQty;
+    }
+    total.textContent = totalBuffer;
+    grandTotal.textContent = parseFloat(shipping.textContent) + parseFloat(total.textContent);
+
+}
 
 console.log(cartItems);
 console.log(cartProductIds);
