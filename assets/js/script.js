@@ -4,6 +4,8 @@ const orderForm = document.getElementById("order-form");
 const shipping = document.getElementById("shipping");
 const total = document.getElementById("total");
 const grandTotal = document.getElementById("grand-total");
+let orderDetails = document.getElementById("order-details");
+
 
 //localstorage ensures it is accessible on different pages
 let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
@@ -69,7 +71,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     <button type="button" class="btn btn-dark add-to-cart-btn" 
                         data-product-price="${product.price}"
                         data-product-name="${product.name}"
-                        data-product-qty="2" 
+                        data-product-qty="1" 
                         data-product-id="${product.id}">
                         Add to Cart
                     </button>
@@ -201,3 +203,30 @@ function totals(){
 
 console.log(cartItems);
 console.log(cartProductIds);
+
+//convert array to easily readable string
+orderDetails.value = cartItems
+    .map(item => `ID: ${item.productId}, Name: ${item.productName}, Price: €${item.productPrice}, Quantity: ${item.productQty}`)
+    .join('\n');
+
+
+// Bootstrap javaScript for disabling form submissions if there are invalid fields
+(() => {
+    'use strict'
+  
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    const forms = document.querySelectorAll('.needs-validation')
+  
+    // Loop over them and prevent submission
+    Array.from(forms).forEach(form => {
+      form.addEventListener('submit', event => {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+  
+        form.classList.add('was-validated')
+      }, false)
+    })
+  })()
+  
