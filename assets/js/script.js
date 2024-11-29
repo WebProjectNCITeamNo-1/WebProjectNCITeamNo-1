@@ -38,7 +38,7 @@ const allProducts = [
 
 // Get the container element
 const productList = document.getElementById('product-list');
-const shoppingCart = document.getElementById('shopping-cart3');
+const shoppingCart = document.getElementById('shopping-cart-list');
 
 //Allow DOM to load before actions
 document.addEventListener("DOMContentLoaded", function() {
@@ -107,32 +107,39 @@ document.addEventListener("DOMContentLoaded", function() {
 
     }
     else if(bodyId==='cart-page'){
-        // Looping through the allproducts array and creating each cards
-        cartItems.forEach(item => {
-            // Create the card outer div
-            const basket = document.createElement('div');
-            basket.classList.add('card', 'm-3');
-            basket.style.width = '36rem';
+        if(cartItems.length > 0){
+            // Looping through the allproducts array and creating each cards
+            cartItems.forEach(item => {
+                // Create the card outer div
+                const basket = document.createElement('div');
+                basket.classList.add('card', 'm-3');
+                basket.style.width = '36rem';
 
-            // Populate the div/card's inner content
+                // Populate the div/card's inner content
 
-            basket.innerHTML = `
-                <div class="card-body">
-                    <div class="row bg-warning">
-                        <div class="col">${item.productId}</div>
-                        <div class="col">${item.productName}</div>
-                        <div class="col">${item.productPrice}</div>
-                        <div class="col">
-                            <input id="qty-${item.productId}" value="${item.productQty}" type="number" min="1" max="99" style="width: 40px;">
-                            <a onclick="priceUpdate(${item.productId})"><span>Update</span></a>
+                basket.innerHTML = `
+                    <div class="card-body">
+                        <div class="row bg-warning">
+                            <div class="col">${item.productId}</div>
+                            <div class="col">${item.productName}</div>
+                            <div class="col">${item.productPrice}</div>
+                            <div class="col">
+                                <input id="qty-${item.productId}" value="${item.productQty}" type="number" min="1" max="99" style="width: 40px;">
+                                <a onclick="priceUpdate(${item.productId})"><span>Update</span></a>
+                            </div>
+                            <div id="subtotal-${item.productId}" class="col subt-total">${item.productPrice*item.productQty}</div>
                         </div>
-                        <div id="subtotal-${item.productId}" class="col subt-total">${item.productPrice*item.productQty}</div>
+                        
                     </div>
-                    
-                </div>
-            `;
-            shoppingCart.appendChild(basket);
-        });
+                `;
+                shoppingCart.appendChild(basket);
+            });
+        }else{
+            let emptyCartButton = document.getElementById("empty-cart");
+            emptyCartButton.style.display = "none";
+            shoppingCart.innerHTML = "Your Cart is Currently Empty!";
+        }
+
     }
 
 
