@@ -12,16 +12,56 @@ let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
 let cartProductIds = JSON.parse(localStorage.getItem('cartProductIds')) || [];
 
 
-// Get the container element
+//Product array
+let allProducts = [];
+const googleSheetUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSPincwalJfope49qT7BjSqoJauyMnjolV8PcEJf20XIj-LHCE4DZfkNMtV5rPslS0zNs-C6o-gjabr/pub?output=csv";
+
+
+//fetch products from google sheet
+function fetchProducts() {
+    return fetch(googleSheetUrl)
+        .then(response => response.text())
+        .then(csvText => {
+            // Parse CSV with PapaParse
+            const results = Papa.parse(csvText, {
+                header: true, // Use the first row as headers
+                skipEmptyLines: true, // Ignore empty rows
+                dynamicTyping: true // Automatically convert numeric values
+            });
+
+            if (results.errors.length) {
+                console.error("Error parsing CSV:", results.errors);
+                return [];
+            }
+
+            return results.data.map(product => {
+                // Ensure all required fields are present
+                product.price = product.price || 0;
+                product.description = product.description || "No description available.";
+                product.image = product.image || "https://via.placeholder.com/150";
+                return product;
+            });
+        })
+        .catch(error => {
+            console.error("Error fetching products:", error);
+            return [];
+        });
+}
+
+
 
 
 //Allow DOM to load before actions
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", async function() {
     const bodyId = document.body.id;
     const productList = document.getElementById('product-list');
     const shoppingCart = document.getElementById('shopping-cart-list');
 
+    //Fetch the products from the csv
+    allProducts = await fetchProducts();
+
     if(bodyId==='index-page'){
+        
         // Looping through the allproducts array and creating each cards
         allProducts.forEach(product => {
             // Create the card outer div
@@ -36,6 +76,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     <h5 class="card-title">${product.name}</h5>
                     <p class="card-text">${product.description}</p>
                     <p class="card-price">Price: €${product.price.toFixed(2)}</p>
+                    <a href="#" class="btn btn-primary">View</a>
                     <button type="button" class="btn btn-dark add-to-cart-btn" 
                         data-product-price="${product.price}"
                         data-product-name="${product.name}"
@@ -117,7 +158,12 @@ document.addEventListener("DOMContentLoaded", function() {
         totals();
 
     }
-
+    //convert array to easily readable string
+    if (orderDetails) {
+        orderDetails.value = cartItems
+            .map(item => `ID: ${item.productId}, Name: ${item.productName}, Price: €${item.productPrice}, Quantity: ${item.productQty}`)
+            .join('\n');
+    }
 
     
 });
@@ -169,13 +215,6 @@ function totals(){
 
 }
 
-console.log(cartItems);
-console.log(cartProductIds);
-
-//convert array to easily readable string
-orderDetails.value = cartItems
-    .map(item => `ID: ${item.productId}, Name: ${item.productName}, Price: €${item.productPrice}, Quantity: ${item.productQty}`)
-    .join('\n');
 
 
 // Bootstrap javaScript for disabling form submissions if there are invalid fields

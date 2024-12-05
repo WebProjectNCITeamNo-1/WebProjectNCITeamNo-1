@@ -77,22 +77,20 @@
         </div>
     </nav>
     <div class="container">
-      <div class="col">
-        <div class="d-flex flex-wrap mt-5" id="shopping-cart-list">
+      <div class="row d-flex justify-content-between mb-5">
+        <div class="col-8 mt-5" id="shopping-cart-list"></div>
 
-        </div>
-
-        <div class="card mb-5" id="totals-box">
+        <div class="col-4 card mt-5" id="totals-box">
           <p>Total: <span id="total"></span></p>
           <p>Shipping: <span id="shipping"></span></p>
           <p>Grand Total: <span id="grand-total"></span></p>
           <div class="row">
-            <button id="empty-cart" class="mx-2 col-1 btn btn-outline-danger btn-sm" onclick="emptyCart(location.reload())">Empty Cart</button>  
+            <button id="empty-cart" class="mx-2 col-3 btn btn-outline-danger btn-sm" onclick="emptyCart(location.reload())">Empty Cart</button>  
           </div>
 
         </div>
       </div>
-      <div class="accordion" id="accordionExample">
+      <div class="accordion mb-5" id="accordionExample">
         <div class="accordion-item">
           <h2 class="accordion-header">
             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
