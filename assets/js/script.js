@@ -12,46 +12,15 @@ let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
 let cartProductIds = JSON.parse(localStorage.getItem('cartProductIds')) || [];
 
 
-//Product array
-const allProducts = [
-    { 
-        id: 1, 
-        name: "Monalissa", 
-        price: 25, 
-        description: "Some quick example text to build on the card title and make up the bulk of the card's content.", 
-        image: "https://api-www.louvre.fr/sites/default/files/2020-12/leonard-de-vinci-la-joconde-portrait-de-monna-lisa-detail.jpg" 
-    },
-    { 
-        id: 2, 
-        name: "Eifle Tower", 
-        price: 40, 
-        description: "Some quick example text to build on the card title and make up the bulk of the card's content.", 
-        image: "https://media.architecturaldigest.com/photos/5ef5f6b4e5c8c1d259c3b00b/16:9/w_1600,c_limit/GettyImages-803432314.jpg" 
-    },
-    { 
-        id: 3, 
-        name: "Eire Tower", 
-        price: 30, 
-        description: "Some quick example text to build on the card title and make up the bulk of the card's content.", 
-        image: "https://www.wmf-inc.com/assets/galleries/Projects/Bicentennial-Tower/_AUTOx300_fit_center-center_100/Tower.jpg" 
-    },
-    { 
-        id: 4, 
-        name: "Famous Art", 
-        price: 30, 
-        description: "Some quick example text to build on the card title and make up the bulk of the card's content.", 
-        image: "https://www.singulart.com/blog/wp-content/uploads/2023/08/image-34-1140x855.png" 
-    }
-];
-
 // Get the container element
-const productList = document.getElementById('product-list');
-const shoppingCart = document.getElementById('shopping-cart-list');
+
 
 //Allow DOM to load before actions
 document.addEventListener("DOMContentLoaded", function() {
     const bodyId = document.body.id;
-    const currentPath = window.location.pathname;
+    const productList = document.getElementById('product-list');
+    const shoppingCart = document.getElementById('shopping-cart-list');
+
     if(bodyId==='index-page'){
         // Looping through the allproducts array and creating each cards
         allProducts.forEach(product => {
@@ -67,7 +36,6 @@ document.addEventListener("DOMContentLoaded", function() {
                     <h5 class="card-title">${product.name}</h5>
                     <p class="card-text">${product.description}</p>
                     <p class="card-price">Price: €${product.price.toFixed(2)}</p>
-                    <a href="#" class="btn btn-primary">View</a>
                     <button type="button" class="btn btn-dark add-to-cart-btn" 
                         data-product-price="${product.price}"
                         data-product-name="${product.name}"
