@@ -22,12 +22,12 @@ let cartProductIds = JSON.parse(localStorage.getItem('cartProductIds')) || [];
 
 //Product array
 let allProducts = [];
-const googleSheetUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSPincwalJfope49qT7BjSqoJauyMnjolV8PcEJf20XIj-LHCE4DZfkNMtV5rPslS0zNs-C6o-gjabr/pub?output=csv";
+const csvProducts = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSPincwalJfope49qT7BjSqoJauyMnjolV8PcEJf20XIj-LHCE4DZfkNMtV5rPslS0zNs-C6o-gjabr/pub?output=csv";
 
 
 //fetch products from google sheet
-function fetchProducts() {
-    return fetch(googleSheetUrl)
+function fetchProducts(x = null) {
+    return fetch(csvProducts)
         .then(response => response.text())
         .then(csvText => {
             // Parse CSV with PapaParse
@@ -42,13 +42,25 @@ function fetchProducts() {
                 return [];
             }
 
-            return results.data.map(product => {
-                // Ensure all required fields are present
+            // Map and ensure all required fields are present
+            const allProducts = results.data.map(product => {
                 product.price = product.price || 0;
                 product.description = product.description || "No description available.";
                 product.image = product.image || "https://via.placeholder.com/150";
+                product.category = product.category || "Uncategorized"; // Ensure category field exists
                 return product;
             });
+
+            // Filter by category if "x" is provided
+            if (x) {
+                const filteredProducts = allProducts.filter(
+                    product => product.category.toLowerCase() === x.toLowerCase()
+                );
+                return filteredProducts;
+            }
+
+            // Return all products if no filter is provided
+            return allProducts;
         })
         .catch(error => {
             console.error("Error fetching products:", error);
@@ -65,13 +77,18 @@ document.addEventListener("DOMContentLoaded", async function() {
     const productList = document.getElementById('product-list');
     const shoppingCart = document.getElementById('shopping-cart-list');
 
-    //Fetch the products from the csv
-    allProducts = await fetchProducts();
+    //Fetch the products from the csv based on special product category
+    if(bodyId==='index-page'){
+        products = await fetchProducts("special");
+    }
+    if(bodyId==='product-page'){
+        products = await fetchProducts();
+    }
 
     if(bodyId==='index-page'){
         
         // Looping through the allproducts array and creating each cards
-        allProducts.forEach(product => {
+        products.forEach(product => {
             // Create the card outer div
             const card = document.createElement('div');
             card.classList.add('card', 'm-3');
