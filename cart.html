@@ -22,24 +22,6 @@
           });
       })();
   </script>
-  <script type="text/javascript">
-      window.onload = function() {
-          document.getElementById('order-form').addEventListener('submit', function(event) {
-              event.preventDefault();
-              // these IDs from the previous steps
-              emailjs.sendForm('service_ubzke86', 'artshop_order_form', this)
-                  .then(() => {
-                    const emailAddress = emails.value;
-                    const firstName = firstNames.value;
-                    const lastName = lastNames.value;
-                    emptyCart2();
-                    messageAlert(emailAddress, firstName, lastName);
-                  }, (error) => {
-                      alert('FAILED...', error);
-                  });
-          });
-      }
-  </script>
 </head>
 <body id="cart-page">
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -105,6 +87,7 @@
               <div class="accordion-body col-8">
                 <div>
                   <form id="order-form" class="needs-validation" novalidate>
+                    <input id="order-number" type="hidden" name="order_number" value=""></input>
                     <textarea id="order-details" style="display: none;" name="order_details" value=""></textarea>
                     <div class="row g-3">
                       <div class="col-sm-6">
@@ -220,7 +203,7 @@
                     <div class="row gy-3">
                       <div class="col-md-6">
                         <label for="cc-name" class="form-label">Name on card</label>
-                        <input type="text" class="form-control" id="cc-name" placeholder="" required>
+                        <input type="text" class="form-control" id="cc-name" placeholder="Name" required>
                         <small class="text-body-secondary">Full name as displayed on card</small>
                         <div class="invalid-feedback">
                           Name on card is required
@@ -229,7 +212,7 @@
           
                       <div class="col-md-6">
                         <label for="cc-number" class="form-label">Credit card number</label>
-                        <input type="text" class="form-control" id="cc-number" placeholder="" required>
+                        <input type="text" class="form-control" id="cc-number" placeholder="Card Number" required>
                         <div class="invalid-feedback">
                           Credit card number is required
                         </div>
@@ -237,7 +220,7 @@
           
                       <div class="col-md-3">
                         <label for="cc-expiration" class="form-label">Expiration</label>
-                        <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
+                        <input type="text" class="form-control" id="cc-expiration" placeholder="MM/YY" required>
                         <div class="invalid-feedback">
                           Expiration date required
                         </div>
@@ -245,7 +228,7 @@
           
                       <div class="col-md-3">
                         <label for="cc-cvv" class="form-label">CVV</label>
-                        <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
+                        <input type="text" class="form-control" id="cc-cvv" placeholder="3 Digit" required>
                         <div class="invalid-feedback">
                           Security code required
                         </div>
