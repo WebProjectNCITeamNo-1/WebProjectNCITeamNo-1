@@ -81,11 +81,11 @@ document.addEventListener("DOMContentLoaded", async function() {
     if(bodyId==='index-page'){
         products = await fetchProducts("special");
     }
-    if(bodyId==='product-page'){
+    if(bodyId==='products-page'){
         products = await fetchProducts();
     }
 
-    if(bodyId==='index-page'){
+    if(bodyId==='index-page' || bodyId==='products-page'){
         
         // Looping through the allproducts array and creating each cards
         products.forEach(product => {
