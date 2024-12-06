@@ -5,6 +5,12 @@ const shipping = document.getElementById("shipping");
 const total = document.getElementById("total");
 const grandTotal = document.getElementById("grand-total");
 let orderDetails = document.getElementById("order-details");
+const accordionCheckout = document.getElementById("accordionCheckout");
+const emails = document.getElementById('email');
+const firstNames = document.getElementById('firstName');
+const lastNames = document.getElementById('lastName');
+
+
 
 
 //localstorage ensures it is accessible on different pages
@@ -114,17 +120,13 @@ document.addEventListener("DOMContentLoaded", async function() {
                     cartProductIds.push(productId);
                     localStorage.setItem('cartProductIds', JSON.stringify(cartProductIds));
                 };
-
-                
-                
-                console.log(cartItems);
-                console.log(cartProductIds);
             });
         });
 
     }
     else if(bodyId==='cart-page'){
         if(cartItems.length > 0){
+            accordionCheckout.style.display ="block";
             // Looping through the allproducts array and creating each cards
             cartItems.forEach(item => {
                 // Create the card outer div
@@ -154,6 +156,7 @@ document.addEventListener("DOMContentLoaded", async function() {
         }else{
             emptyCartButton.style.display = "none";
             shoppingCart.innerHTML = "Your Cart is Currently Empty!";
+            accordionCheckout.style.display ="none";
         }
         totals();
 
@@ -174,6 +177,13 @@ function emptyCart(){
     cartProductIds = [];
     localStorage.setItem('cartProductIds', JSON.stringify(cartProductIds));
     alert("Your Shopping cart is now empty!");
+    accordionCheckout.style.display ="none";
+};
+function emptyCart2(){
+    cartItems = [];
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    cartProductIds = [];
+    localStorage.setItem('cartProductIds', JSON.stringify(cartProductIds));
 };
 
 function priceUpdate(productId){
@@ -215,8 +225,6 @@ function totals(){
 
 }
 
-
-
 // Bootstrap javaScript for disabling form submissions if there are invalid fields
 (() => {
     'use strict'
@@ -235,5 +243,31 @@ function totals(){
         form.classList.add('was-validated')
       }, false)
     })
-  })()
-  
+})()
+
+function messageAlert(emailAddress, firstName, lastName) {
+    const message = document.getElementById('message');
+    const formBox = document.getElementById('checkout-main');
+    let orderNumber = Math.floor(Math.random() * 33333333) + 1;
+    const date = new Date();
+    
+    message.innerHTML = `<div class="container mt-5 card">
+                            <div class="p-0 card-header text-center bg-light">
+                                <h2>Hey ${firstName} ${lastName}! Thank You for your order.</h2>            
+
+                                <p class="text-muted">A confirmation email has been sent to <strong>${emailAddress}</strong></p>
+                            </div>
+                            <div class="card-body">
+                                <h4>Order Info</h4>
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <p><strong>Order Number:</strong> #${orderNumber}</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p><strong>Order Date & Time:</strong> ${date}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`;
+    formBox.style.display = 'none';
+}
