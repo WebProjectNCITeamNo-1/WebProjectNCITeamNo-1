@@ -23,13 +23,14 @@ body {
 .hero {
     /* background: rgba(0, 123, 255, 0.9);  */
     /* background-image: linear-gradient(135deg, rgba(0, 123, 255, 0.9) 25%, transparent 25%, transparent 50%, rgba(0, 123, 255, 0.9) 50%, rgba(0, 123, 255, 0.9) 75%, transparent 75%, transparent); */
-    background: url('/assets/images/joanna-kosinska-mjC9apK53a8-unsplash.jpg')no-repeat center center;
+    background: url('https://images.unsplash.com/photo-1509624776920-0fac24a9dfda')no-repeat center center;
     /* animates zoom effect on loading page */
     animation-name: hero-zoom;
     animation-duration: 5s;
     animation-fill-mode: forwards;
     
 }
+
 /* creates the level of zoom for hero image */
 @keyframes hero-zoom {
     from {
@@ -39,4 +40,11 @@ body {
     to {
         transform: scale(1);
     }
+}
+
+.hero-body {
+    background: rgba(0, 123, 255, 0.9); 
+    background-image: linear-gradient(135deg, rgba(0, 123, 255, 0.9) 25%, transparent 25%, transparent 50%, rgba(0, 123, 255, 0.9) 50%, rgba(0, 123, 255, 0.9) 75%, transparent 75%, transparent);
+
+
 }
