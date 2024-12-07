@@ -1,17 +1,5 @@
-/* Import font from google fonts */
-@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
-
-
 #accordionCheckout, checkout-main {
     display: none;
-}
-
-/* Use flexbox for the container to manage layout */
-body {
-    font-family: 'Lato', sans-serif;
-    display: flex;
-    flex-direction: column;
-
 }
 
 .header-logo {
@@ -23,29 +11,6 @@ body {
     text-decoration: none;
 }
 
-.hero {
-    background: rgba(228, 229, 230, 0.9); 
-    background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.99) 50%, rgba(255, 255, 255, 0.9) 75%, transparent 75%, transparent);
-
-    /* background: url('https://images.unsplash.com/photo-1509624776920-0fac24a9dfda')no-repeat center center; */
-    /* animates zoom effect on loading page */
-    animation-name: hero-zoom;
-    animation-duration: 5s;
-    animation-fill-mode: forwards;
-    
-}
-
-/* creates the level of zoom for hero image */
-@keyframes hero-zoom {
-    from {
-        transform: scale(1.1);
-    }
-
-    to {
-        transform: scale(1);
-    }
-}
-
 /* Background color to hero div */
 .hero-body {
     background: rgba(0, 123, 255, 0.9); 
@@ -55,12 +20,6 @@ body {
 
 .cursor {
     cursor: pointer;
-}
-
-/* Ensure the body and html occupy full height */
-html, body {
-    height: 100%;
-    margin: 0;
 }
 
 /* The main content wrapper */
