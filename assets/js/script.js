@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", async function() {
             card.innerHTML = `
                 <img src="${product.image}" class="card-img-top" style="height: 160px;" alt="${product.name}">
                 <div class="card-body">
-                    <h5 class="card-title">${product.name}</h5>
+                    <h3 class="card-title">${product.name}</h3>
                     <p class="card-text">${product.description}</p>
                     <p class="card-price">Price: €${product.price.toFixed(2)}</p>
                     <button type="button" class="btn btn-dark add-to-cart-btn" 
