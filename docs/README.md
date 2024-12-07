@@ -1,1 +1,0 @@
-Folder to hold the planning docs for the project.
