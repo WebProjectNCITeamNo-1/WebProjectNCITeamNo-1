@@ -248,11 +248,10 @@ function totals(){
 
 //Order confirmation message
 function messageAlert(emailAddress, firstName, lastName) {
-    const message = document.getElementById('message');
     const formBox = document.getElementById('checkout-main');
     const date = new Date();
     
-    message.innerHTML = `<div class="container mt-5 card">
+    formBox.innerHTML = `<div class="container mt-5 card">
                             <div class="p-0 card-header text-center bg-light">
                                 <h2>Hey ${firstName} ${lastName}! Thank You for your order.</h2>            
 
