@@ -160,7 +160,7 @@ document.addEventListener("DOMContentLoaded", async function() {
                             <div class="col-2 px-0">${item.productPrice}.00</div>
                             <div class="col">
                                 <input id="qty-${item.productId}" value="${item.productQty}" type="number" min="1" max="99" style="width: 40px;">
-                                <a onclick="priceUpdate(${item.productId})"><span class="text-primary cursor">Update</span></a>
+                                <a onclick="priceUpdate(${item.productId})"><span class="text-dark cursor">Update</span></a>
                             </div>
                             <div id="subtotal-${item.productId}" class="col-2 subt-total px-0">${item.productPrice*item.productQty}.00</div>
                         </div>
