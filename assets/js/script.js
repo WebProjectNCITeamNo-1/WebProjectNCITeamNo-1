@@ -150,22 +150,19 @@ document.addEventListener("DOMContentLoaded", async function() {
             cartItems.forEach(item => {
                 // Create the card outer div
                 const basket = document.createElement('div');
-                basket.classList.add('card', 'm-3', 'align-items-center');
-                basket.style.width = '36rem';
 
                 // Populate the div/card's inner content
 
                 basket.innerHTML = `
-                    <div class="card-body">
-                        <div class="row bg-warning">
-                            <div class="col">${item.productId}</div>
-                            <div class="col">${item.productName}</div>
-                            <div class="col">${item.productPrice}.00</div>
+                    <div>
+                        <div class="row">
+                            <div class="col"><i class="fas fa-tag"></i> ${item.productName}</div>
+                            <div class="col-2 px-0">${item.productPrice}.00</div>
                             <div class="col">
                                 <input id="qty-${item.productId}" value="${item.productQty}" type="number" min="1" max="99" style="width: 40px;">
-                                <a onclick="priceUpdate(${item.productId})"><span>Update</span></a>
+                                <a onclick="priceUpdate(${item.productId})"><span class="text-primary cursor">Update</span></a>
                             </div>
-                            <div id="subtotal-${item.productId}" class="col subt-total">${item.productPrice*item.productQty}.00</div>
+                            <div id="subtotal-${item.productId}" class="col-2 subt-total px-0">${item.productPrice*item.productQty}.00</div>
                         </div>
                         
                     </div>
@@ -189,80 +186,7 @@ document.addEventListener("DOMContentLoaded", async function() {
             orderNumber.value = generateOrderNumber;
     }
 
-    // Bootstrap javaScript for disabling form submissions if there are invalid fields
-    document.addEventListener('DOMContentLoaded', function () {
-        const form = document.getElementById('order-form');
 
-        form.addEventListener('submit', function (event) {
-            event.preventDefault(); // Always prevent the default behavior initially
-
-            // Perform Bootstrap and custom validation
-            let isValid = true;
-
-            // Bootstrap validation
-            if (!form.checkValidity()) {
-                isValid = false;
-                form.classList.add('was-validated');
-            }
-
-            // Custom manual validation for credit card fields
-            const ccNumber = document.getElementById('cc-number');
-            const ccExpiration = document.getElementById('cc-expiration');
-            const ccCVV = document.getElementById('cc-cvv');
-
-            // Validate Credit Card Number
-            if (!/^\d{16}$/.test(ccNumber.value)) {
-                ccNumber.classList.add('is-invalid');
-                ccNumber.nextElementSibling.textContent = 'Credit card number must be 16 digits.';
-                isValid = false;
-            } else {
-                ccNumber.classList.remove('is-invalid');
-                ccNumber.classList.add('is-valid');
-            }
-
-            // Validate Expiration Date
-            const expirationPattern = /^(0[1-9]|1[0-2])\/\d{2}$/;
-            const [month, year] = ccExpiration.value.split('/').map(Number);
-            const now = new Date();
-            const currentYear = parseInt(now.getFullYear().toString().slice(-2), 10);
-            const currentMonth = now.getMonth() + 1;
-
-            if (!expirationPattern.test(ccExpiration.value) || year < currentYear || (year === currentYear && month < currentMonth)) {
-                ccExpiration.classList.add('is-invalid');
-                ccExpiration.nextElementSibling.textContent = 'Enter a valid expiration date (MM/YY) that is not expired.';
-                isValid = false;
-            } else {
-                ccExpiration.classList.remove('is-invalid');
-                ccExpiration.classList.add('is-valid');
-            }
-
-            // Validate CVV
-            if (!/^\d{3}$/.test(ccCVV.value)) {
-                ccCVV.classList.add('is-invalid');
-                ccCVV.nextElementSibling.textContent = 'CVV must be 3 digits.';
-                isValid = false;
-            } else {
-                ccCVV.classList.remove('is-invalid');
-                ccCVV.classList.add('is-valid');
-            }
-
-            // If validation passes, proceed with EmailJS
-            if (isValid) {
-                emailjs.sendForm('service_ubzke86', 'artshop_order_form', this)
-                    .then(() => {
-                        const emailAddress = document.getElementById('email').value;
-                        const firstName = document.getElementById('firstName').value;
-                        const lastName = document.getElementById('lastName').value;
-
-                        emptyCart2(); // Clear the cart
-                        messageAlert(emailAddress, firstName, lastName); // Display success message
-                    })
-                    .catch((error) => {
-                        alert('Email sending failed. Please try again later.', error);
-                    });
-            }
-        });
-    });    
 });
 
 function emptyCart(){

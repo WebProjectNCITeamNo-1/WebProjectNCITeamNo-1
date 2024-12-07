@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="An online platform tailored for Senior School Certificate Exam preparation">
-  <meta name="keywords" content="senior school, examinations, practive, maths, english, government">
+  <meta name="description" content="Store premium art frames and unique decor at ArtStore. Explore rustic, modern, and vintage designs for your home or office.">
+  <meta name="keywords" content="art frames, decor, modern designs, rustic frames, modern frames, vintage frames, luxury decor">
   <meta name="author" content="Designed and developed by Chinonso Dickson Olejeme & James Kinlan; For NCIRL Web Development Project ">
   <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
   <link rel="manifest" href="assets/favicon/site.webmanifest">
@@ -12,243 +12,259 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <title>Art Shop Limited</title>
+  <title>Art Store | Shopping Cart</title>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  <script type="text/javascript">
-      (function() {
-          // https://dashboard.emailjs.com/admin/account
-          emailjs.init({
-            publicKey: "uhsJeZ_u6mbs4nY-h",
-          });
-      })();
-  </script>
+  <script type="text/javascript" src="assets/js/validation.js"></script>
 </head>
 <body id="cart-page">
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="index.html">ART SHOP</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarScroll">
-            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="index.html">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="cart.html">Cart</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Link
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link disabled" aria-disabled="true">Link</a>
-              </li>
-            </ul>
-            <div class="d-flex">
-                <div class="d-flex">
-                    <a class="text-decoration-none" href="cart.html"><i class="fa-solid fa-cart-shopping btn btn-primary"></i> Cart</a>
-                  </div>
+    <div class="container">
+      <header class="border-bottom lh-1 py-3">
+        <div class="row flex-nowrap justify-content-between align-items-center">
+          <div class="col text-center">
+            <a class="header-logo text-body-emphasis text-decoration-none" href="/">Art Store</a>
           </div>
         </div>
-    </nav>
-    <div id="message"></div>
-    <div id="checkout-main" class="container">
-      <div class="row d-flex justify-content-between mb-5">
-        <div class="col-8 mt-5" id="shopping-cart-list"></div>
-
-        <div class="col-4 card mt-5" id="totals-box">
-          <p>Total: <span id="total"></span></p>
-          <p>Shipping: <span id="shipping"></span></p>
-          <p>Grand Total: <span id="grand-total"></span></p>
-          <div class="row">
-            <button id="empty-cart" class="mx-2 col-3 btn btn-outline-danger btn-sm" onclick="emptyCart(location.reload())">Empty Cart</button>  
-          </div>
-
-        </div>
+      </header>
+    
+      <div class="nav-scroller py-1 mb-3 border-bottom">
+        <nav class="nav nav-underline justify-content-around">
+          <a class="nav-item nav-link link-body-emphasis" href="index.html">Home</a>
+          <a class="nav-item nav-link link-body-emphasis" href="about.html">About</a>
+          <a class="nav-item nav-link link-body-emphasis" href="products.html">Products</a>
+          <a class="nav-item nav-link link-body-emphasis active" href="cart.html">Cart</a>
+        </nav>
       </div>
-      <div class="accordion mb-5" id="accordionCheckout">
-        <div class="accordion-item">
-          <h2 class="accordion-header">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-              Enter Order Details
-            </button>
-          </h2>
-          <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionCheckout">
-            <div class="d-flex">
-              <div class="accordion-body col-8">
-                <div>
-                  <form id="order-form" class="needs-validation" novalidate>
-                    <input id="order-number" type="hidden" name="order_number" value=""></input>
-                    <textarea id="order-details" style="display: none;" name="order_details" value=""></textarea>
-                    <div class="row g-3">
-                      <div class="col-sm-6">
-                        <label for="firstName" class="form-label">First name</label>
-                        <input type="text" class="form-control" name="first_name" id="firstName" placeholder="" value="" required>
-                        <div class="invalid-feedback">
-                          Valid first name is required.
-                        </div>
-                      </div>
-          
-                      <div class="col-sm-6">
-                        <label for="lastName" class="form-label">Last name</label>
-                        <input type="text" class="form-control" name="last_name" id="lastName" placeholder="" value="" required>
-                        <div class="invalid-feedback">
-                          Valid last name is required.
-                        </div>
-                      </div>
-          
-                      <div class="col-12">
-                        <label for="username" class="form-label">Username</label>
-                        <div class="input-group has-validation">
-                          <span class="input-group-text">@</span>
-                          <input type="text" class="form-control" name="username" id="username" placeholder="Username">
-                        <div class="invalid-feedback">
-                            Your username is required.
-                          </div>
-                        </div>
-                      </div>
-          
-                      <div class="col-12">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" required>
-                        <div class="invalid-feedback">
-                          Please enter a valid email address for shipping updates.
-                        </div>
-                      </div>
-          
-                      <div class="col-12">
-                        <label for="address" class="form-label">Address</label>
-                        <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
-                        <div class="invalid-feedback">
-                          Please enter your shipping address.
-                        </div>
-                      </div>
-          
-                      <div class="col-12">
-                        <label for="address2" class="form-label">Address 2 <span class="text-body-secondary">(Optional)</span></label>
-                        <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
-                      </div>
-          
-                      <div class="col-md-5">
-                        <label for="country" class="form-label">Country</label>
-                        <select class="form-select" id="country" required>
-                          <option value="">Choose...</option>
-                          <option>Ireland</option>
-                        </select>
-                        <div class="invalid-feedback">
-                          Please select a valid country.
-                        </div>
-                      </div>
-          
-                      <div class="col-md-4">
-                        <label for="state" class="form-label">State</label>
-                        <select class="form-select" id="state" required>
-                          <option value="">Choose...</option>
-                          <option>Dublin</option>
-                        </select>
-                        <div class="invalid-feedback">
-                          Please provide a valid state.
-                        </div>
-                      </div>
-          
-                      <div class="col-md-3">
-                        <label for="zip" class="form-label">PostCode</label>
-                        <input type="text" class="form-control" id="zip" placeholder="" required>
-                        <div class="invalid-feedback">
-                          Post code required.
-                        </div>
-                      </div>
-                    </div>
-          
-                    <hr class="my-4">
-          
-                    <div class="form-check">
-                      <input type="checkbox" class="form-check-input" id="same-address">
-                      <label class="form-check-label" for="same-address">Shipping address is the same as my billing address</label>
-                    </div>
-          
-                    <div class="form-check">
-                      <input type="checkbox" class="form-check-input" id="save-info">
-                      <label class="form-check-label" for="save-info">Save this information for next time</label>
-                    </div>
-          
-                    <hr class="my-4">
-          
-                    <h4 class="mb-3">Payment</h4>
-          
-                    <div class="my-3">
-                      <div class="form-check">
-                        <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked required>
-                        <label class="form-check-label" for="credit">Credit card</label>
-                      </div>
-                      <div class="form-check">
-                        <input id="debit" name="paymentMethod" type="radio" class="form-check-input" required>
-                        <label class="form-check-label" for="debit">Debit card</label>
-                      </div>
-                      <div class="form-check">
-                        <input id="paypal" name="paymentMethod" type="radio" class="form-check-input" required>
-                        <label class="form-check-label" for="paypal">PayPal</label>
-                      </div>
-                    </div>
-          
-                    <div class="row gy-3">
-                      <div class="col-md-6">
-                        <label for="cc-name" class="form-label">Name on card</label>
-                        <input type="text" class="form-control" id="cc-name" placeholder="Name" required>
-                        <small class="text-body-secondary">Full name as displayed on card</small>
-                        <div class="invalid-feedback">
-                          Name on card is required
-                        </div>
-                      </div>
-          
-                      <div class="col-md-6">
-                        <label for="cc-number" class="form-label">Credit card number</label>
-                        <input type="text" class="form-control" id="cc-number" placeholder="Card Number" required>
-                        <div class="invalid-feedback">
-                          Credit card number is required
-                        </div>
-                      </div>
-          
-                      <div class="col-md-3">
-                        <label for="cc-expiration" class="form-label">Expiration</label>
-                        <input type="text" class="form-control" id="cc-expiration" placeholder="MM/YY" required>
-                        <div class="invalid-feedback">
-                          Expiration date required
-                        </div>
-                      </div>
-          
-                      <div class="col-md-3">
-                        <label for="cc-cvv" class="form-label">CVV</label>
-                        <input type="text" class="form-control" id="cc-cvv" placeholder="3 Digit" required>
-                        <div class="invalid-feedback">
-                          Security code required
-                        </div>
-                      </div>
-                    </div>
-          
-                    <hr class="my-4">
-          
-                    <button class="w-100 btn btn-primary btn-lg" type="submit" >Continue to checkout</button>
-                  </form>
+    </div>
+
+    <div class="container" id="message"></div>
+
+    <div id="checkout-main">
+      <div class="container">
+        <div class="mx-2">
+          <div class="row d-flex justify-content-start justify-content-md-between align-items-start mb-5">
+            <!-- Shopping Cart List -->
+            <div class="col-lg-8 col-md-7 me-md-2 col-12 mt-5 bg-light rounded-bottom-2" id="shopping-cart-list">
+              <div>
+                <div class="bg-dark text-light row fw-bold mb-2 rounded-top-2">
+                    <div class="col">Product</div>
+                    <div class="col-2 px-0">Price</div>
+                    <div class="col">Quantity</div>
+                    <div id="subtotal-${item.productId}" class="col-2 subt-total px-0">Sub Total</div>
                 </div>
-              </div>
-              <div class="col-4 bg-info text-center">Place Adverts Here<br>Call 0892010700</div>
+                
+            </div>
+            </div>
+          
+            <!-- Totals Box -->
+            <div class="col-lg-3 col-md-4 col-12 mt-5 bg-light rounded-2 pb-2" id="totals-box">
+              <p><span class="fw-bold">Total:</span> €<span id="total"></span></p>
+              <p><span class="fw-bold">Shipping:</span> €<span id="shipping"></span></p>
+              <p><span class="fw-bold h5">Grand Total:</span> €<span id="grand-total"></span></p>
+              <a id="empty-cart" class="mx-0 col btn btn-outline-danger btn-sm" onclick="emptyCart(location.reload())">Empty Cart</a>  
             </div>
           </div>
         </div>
       </div>
-
+    
+      <div class="container">
+        <div class="accordion mb-5" id="accordionCheckout">
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                Enter Order Details
+              </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionCheckout">
+              <div class="d-flex">
+                <div class="accordion-body col-lg-8 col-md-12">
+                  <div>
+                    <form id="order-form" class="needs-validation" novalidate>
+                      <input id="order-number" type="hidden" name="order_number" value=""></input>
+                      <textarea id="order-details" style="display: none;" name="order_details" value=""></textarea>
+                      <div class="row g-3">
+                        <div class="col-sm-6">
+                          <label for="firstName" class="form-label">First name</label>
+                          <input type="text" class="form-control" name="first_name" id="firstName" placeholder="" value="" required>
+                          <div class="invalid-feedback">
+                            Valid first name is required.
+                          </div>
+                        </div>
+            
+                        <div class="col-sm-6">
+                          <label for="lastName" class="form-label">Last name</label>
+                          <input type="text" class="form-control" name="last_name" id="lastName" placeholder="" value="" required>
+                          <div class="invalid-feedback">
+                            Valid last name is required.
+                          </div>
+                        </div>
+            
+                        <div class="col-12">
+                          <label for="username" class="form-label">Username</label>
+                          <div class="input-group has-validation">
+                            <span class="input-group-text">@</span>
+                            <input type="text" class="form-control" name="username" id="username" placeholder="Username">
+                          <div class="invalid-feedback">
+                              Your username is required.
+                            </div>
+                          </div>
+                        </div>
+            
+                        <div class="col-12">
+                          <label for="email" class="form-label">Email</label>
+                          <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" required>
+                          <div class="invalid-feedback">
+                            Please enter a valid email address for shipping updates.
+                          </div>
+                        </div>
+            
+                        <div class="col-12">
+                          <label for="address" class="form-label">Address</label>
+                          <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
+                          <div class="invalid-feedback">
+                            Please enter your shipping address.
+                          </div>
+                        </div>
+            
+                        <div class="col-12">
+                          <label for="address2" class="form-label">Address 2 <span class="text-body-secondary">(Optional)</span></label>
+                          <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
+                        </div>
+            
+                        <div class="col-md-5">
+                          <label for="country" class="form-label">Country</label>
+                          <select class="form-select" id="country" required>
+                            <option value="">Choose...</option>
+                            <option>Ireland</option>
+                          </select>
+                          <div class="invalid-feedback">
+                            Please select a valid country.
+                          </div>
+                        </div>
+            
+                        <div class="col-md-4">
+                          <label for="state" class="form-label">State</label>
+                          <select class="form-select" id="state" required>
+                            <option value="">Choose...</option>
+                            <option>Dublin</option>
+                          </select>
+                          <div class="invalid-feedback">
+                            Please provide a valid state.
+                          </div>
+                        </div>
+            
+                        <div class="col-md-3">
+                          <label for="zip" class="form-label">PostCode</label>
+                          <input type="text" class="form-control" id="zip" placeholder="" required>
+                          <div class="invalid-feedback">
+                            Post code required.
+                          </div>
+                        </div>
+                      </div>
+            
+                      <hr class="my-4">
+            
+                      <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="same-address">
+                        <label class="form-check-label" for="same-address">Shipping address is the same as my billing address</label>
+                      </div>
+            
+                      <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="save-info">
+                        <label class="form-check-label" for="save-info">Save this information for next time</label>
+                      </div>
+            
+                      <hr class="my-4">
+            
+                      <h4 class="mb-3">Payment</h4>
+            
+                      <div class="my-3">
+                        <div class="form-check">
+                          <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked required>
+                          <label class="form-check-label" for="credit">Credit card</label>
+                        </div>
+                        <div class="form-check">
+                          <input id="debit" name="paymentMethod" type="radio" class="form-check-input" required>
+                          <label class="form-check-label" for="debit">Debit card</label>
+                        </div>
+                        <div class="form-check">
+                          <input id="paypal" name="paymentMethod" type="radio" class="form-check-input" required>
+                          <label class="form-check-label" for="paypal">PayPal</label>
+                        </div>
+                      </div>
+            
+                      <div class="row gy-3">
+                        <div class="col-md-6">
+                          <label for="cc-name" class="form-label">Name on card</label>
+                          <input type="text" class="form-control" id="cc-name" placeholder="Name" required>
+                          <small class="text-body-secondary">Full name as displayed on card</small>
+                          <div class="invalid-feedback">
+                            Name on card is required
+                          </div>
+                        </div>
+            
+                        <div class="col-md-6">
+                          <label for="cc-number" class="form-label">Credit card number</label>
+                          <input type="text" class="form-control" id="cc-number" placeholder="Card Number" required>
+                          <div class="invalid-feedback">
+                            Credit card number is required
+                          </div>
+                        </div>
+            
+                        <div class="col-md-3">
+                          <label for="cc-expiration" class="form-label">Expiration</label>
+                          <input type="text" class="form-control" id="cc-expiration" placeholder="MM/YY" required>
+                          <div class="invalid-feedback">
+                            Expiration date required
+                          </div>
+                        </div>
+            
+                        <div class="col-md-3">
+                          <label for="cc-cvv" class="form-label">CVV</label>
+                          <input type="text" class="form-control" id="cc-cvv" placeholder="3 Digit" required>
+                          <div class="invalid-feedback">
+                            Security code required
+                          </div>
+                        </div>
+                      </div>
+            
+                      <hr class="my-4">
+            
+                      <button class="w-100 btn btn-primary btn-lg" type="submit" >Continue to checkout</button>
+                    </form>
+                  </div>
+                </div>
+                <div class="col-4 bg-light text-center d-none d-lg-block">Place Adverts Here<br>Call 0892010700</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-
+    <div class="container">
+      <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+        <div class="col-md-4 d-flex align-items-center">
+          <span class="mb-3 mb-md-0 text-body-secondary">&copy; 2024 Art Store | D'Olier Street, Dublin</span>
+        </div>
+    
+        <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+          <li class="ms-3">
+            <a href="https://facebook.com" aria-label="Check us out on Facebook" target="_blank" rel="noopener"><i
+            class="fa-brands fa-facebook"></i>
+            </a>
+          </li>
+          <li class="ms-3">
+            <a href="https://x.com" aria-label="Check us out on Facebook" target="_blank" rel="noopener"><i
+            class="fa-brands fa-x"></i>
+            </a>
+          </li>
+          <li class="ms-3">
+            <a href="https://instagram.com" aria-label="Check us out on Facebook" target="_blank" rel="noopener"><i
+            class="fa-brands fa-instagram"></i>
+            </a>
+          </li>
+        </ul>
+      </footer>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.1/papaparse.min.js"></script>
     <script src="assets/js/script.js"></script>
