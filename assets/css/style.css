@@ -3,7 +3,7 @@
 }
 
 body {
-   background-image: url(https://pixabay.com/get/ge0e5e12d589097f206f2f84972c271950bb4c8bb6eea782144f15dcb1cd8a897ff1611cbcb845fa0efe57d563a894f58_1920.jpg);
+   background-image: url('https://pixabay.com/get/ge0e5e12d589097f206f2f84972c271950bb4c8bb6eea782144f15dcb1cd8a897ff1611cbcb845fa0efe57d563a894f58_1920.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
