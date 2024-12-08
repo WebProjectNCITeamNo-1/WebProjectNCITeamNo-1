@@ -2,6 +2,11 @@
     display: none;
 }
 
+body {
+   background-image: url(https://pixabay.com/get/ge0e5e12d589097f206f2f84972c271950bb4c8bb6eea782144f15dcb1cd8a897ff1611cbcb845fa0efe57d563a894f58_1920.jpg);
+  
+}
+
 .header-logo {
     font-family: "Playfair Display", Georgia, "Times New Roman", serif/*rtl:Amiri, Georgia, "Times New Roman", serif*/;
     font-size: 2rem;
@@ -14,7 +19,7 @@
 /* Background color to hero div */
 .hero-body {
     background: rgba(0, 123, 255, 0.9); 
-    background-image: linear-gradient(135deg, rgba(0, 123, 255, 0.9) 25%, transparent 25%, transparent 50%, rgba(0, 123, 255, 0.9) 50%, rgba(0, 123, 255, 0.9) 75%, transparent 75%, transparent);
+    background-image:  url(https://cdn.pixabay.com/photo/2020/04/19/08/17/watercolor-5062356_1280.jpg); 
 
 }
 

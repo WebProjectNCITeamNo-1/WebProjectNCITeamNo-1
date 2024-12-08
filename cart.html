@@ -8,6 +8,7 @@
     <meta name="author" content="Designed and developed by Chinonso Dickson Olejeme & James Kinlan; For NCIRL Web Development Project ">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
     <link rel="manifest" href="assets/favicon/site.webmanifest">
+	<link rel="stylesheet" type="text/css" href="\assets\css\style.css" />
     <!-- Preload font -->
     <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
     <!-- Inline critical CSS -->
@@ -17,8 +18,10 @@
       @media (max-width: 768px) { .hero { height: 80vh; display: flex; align-items: center;} }
       .hero {
         background: rgba(228, 229, 230, 0.9);
-        background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.99) 50%, rgba(255, 255, 255, 0.9) 75%, transparent 75%, transparent);
+        background-image:  url(https://cdn.pixabay.com/photo/2020/04/19/08/17/watercolor-5062356_1280.jpg);
+		filter: brightness(1.25);
         animation: hero-zoom 5s forwards;
+		border-style: solid;
 		font-family: 'Lobster', cursive;
       }
       @keyframes hero-zoom { from { transform: scale(1.1); } to { transform: scale(1); } }
