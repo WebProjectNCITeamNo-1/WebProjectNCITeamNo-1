@@ -11,23 +11,40 @@
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/style2.css">
   <!-- Preload font -->
-  <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+  </noscript>
   <!-- Inline critical CSS -->
   <style>
     html, body { height: 100%; margin: 0; }
     body { font-family: 'Rouge Script', Arial, sans-serif; display: flex; flex-direction: column; }
-    @media (max-width: 768px) { .hero { height: 80vh; display: flex; align-items: center;} }
+    .hero {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.99) 50%, rgba(255, 255, 255, 0.9) 75%, transparent 75%, transparent);
+      height: 90vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Lobster', cursive;
+    }
+    .hero h1 {
+      font-size: 2.5rem;
+      color: #dc3545;
+    }
+    .hero p {
+      margin-top: 1rem;
+      font-size: 1.2rem;
+    }
     @media (min-width: 768px) { 
       .hero {
-        height: 90vh;
+        height: 80vh;
         background: rgba(228, 229, 230, 0.9);
-        background-image:  url(https://res.cloudinary.com/djhi60enx/image/upload/v1733683923/texture-2100024_1920_1_k2x2rg.jpg);
-        background-size: cover; /* Ensures the image covers the element */
-		background-position: center; /* Centers the image */
-		background-repeat: no-repeat; /* Prevents the image from repeating */
-		animation: hero-zoom 5s forwards;
-		border-style: solid;
-		font-family: 'Lobster', cursive;
+          background-image:  url(https://res.cloudinary.com/djhi60enx/image/upload/v1733683923/texture-2100024_1920_1_k2x2rg.jpg);
+          background-size: cover; /* Ensures the image covers the element */
+		  background-position: center; /* Centers the image */
+		  background-repeat: no-repeat; /* Prevents the image from repeating */
+		  animation: hero-zoom 5s forwards;
+		  border-style: solid;
       }
     @keyframes hero-zoom { from { transform: scale(1.1); } to { transform: scale(1); } }
     }
@@ -36,7 +53,7 @@
           height: auto;
         }
       }
-</style>
+  </style>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
@@ -96,7 +113,7 @@
         <h3 class="pb-4 mb-4 mt-5 fst-italic border-bottom">
             Art Store Community
         </h3>
-      <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-light">
+      <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-light hero">
         <div class="col-lg-6 px-0">
           <h4 class="display-4 fst-italic text-danger">Let’s Create Together</h4>
           <p class="lead my-3">Ready to elevate your space with ArtShop? Explore our collection of frames and decor, each designed to inspire and impress. Whether you’re a seasoned art lover or just starting your decorating journey, we are here to help you every step of the way.
