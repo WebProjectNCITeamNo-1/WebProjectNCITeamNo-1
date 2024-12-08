@@ -269,5 +269,5 @@ function messageAlert(emailAddress, firstName, lastName) {
                                 </div>
                             </div>
                         </div>`;
-    formBox.style.display = 'none';
+
 }
