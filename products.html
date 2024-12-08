@@ -42,7 +42,10 @@
         height: 80vh;
         background: rgba(228, 229, 230, 0.9);
           background-image:  url(https://res.cloudinary.com/djhi60enx/image/upload/v1733683923/texture-2100024_1920_1_k2x2rg.jpg);
-          animation: hero-zoom 5s forwards;
+          background-size: cover; /* Ensures the image covers the element */
+		  background-position: center; /* Centers the image */
+		  background-repeat: no-repeat; /* Prevents the image from repeating */
+		  animation: hero-zoom 5s forwards;
 		  border-style: solid;
       }
     @keyframes hero-zoom { from { transform: scale(1.1); } to { transform: scale(1); } }
